@@ -2,12 +2,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/root"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:background="@color/colorPrimary"
+        android:textColor="@android:color/white"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:text="Hello World!" />
-
+    <com.spearbothy.simpletouch.CustomView
+        android:clickable="true"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorPrimary"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:textColor="@android:color/white"
+        android:text="Custom View" />
 </LinearLayout>
