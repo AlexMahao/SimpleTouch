@@ -77,6 +77,7 @@ class TouchMessageManager {
     }
 
     private static Message buildMessage(Object proxy, Method method, Object[] args) {
+
         String className = proxy.getClass().getSuperclass().getSimpleName();
         String methodName = method.getName();
         String eventStr = "";
@@ -85,7 +86,9 @@ class TouchMessageManager {
             MotionEvent event = (MotionEvent) arg;
             eventStr = MotionEvent.actionToString(event.getAction());
         }
-        return new Message(className, methodName, eventStr);
+        Message message = new Message(className, methodName, eventStr);
+        message.setViewToken(proxy.hashCode());
+        return message;
     }
 
     private void clearMessage() {

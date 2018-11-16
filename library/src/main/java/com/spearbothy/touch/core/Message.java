@@ -12,6 +12,7 @@ public class Message {
     private String event;
     private boolean before;
     private Boolean result;
+    private int viewToken;
 
     public Message(String className, String methodName, String event) {
         this.className = className;
@@ -53,6 +54,14 @@ public class Message {
 
     public Boolean getResult() {
         return result;
+    }
+
+    public int getViewToken() {
+        return viewToken;
+    }
+
+    public void setViewToken(int viewToken) {
+        this.viewToken = viewToken;
     }
 
     public void setResult(Boolean result) {
