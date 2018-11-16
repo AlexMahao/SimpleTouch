@@ -22,4 +22,5 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.google.dexmaker:dexmaker:1.2'
+    implementation 'com.alibaba:fastjson:1.1.67.android'
 }

@@ -21,9 +21,13 @@ public class Touch {
 
     static final String LOG_TAG = "SimpleTouch";
 
+    static String HOST_PACKAGE_NAME = "";
+
     public static void init(Context context) {
         File dir = context.getDir(DEX_CACHE_DIR, Context.MODE_PRIVATE);
         dir.delete();
+
+        HOST_PACKAGE_NAME = context.getPackageName();
     }
 
     public static void inject(Context context) {

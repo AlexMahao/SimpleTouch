@@ -9,9 +9,12 @@ import java.lang.reflect.Method;
  */
 
 public class TouchHandler implements InvocationHandler {
+
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        TouchPrint.print(proxy, method, args);
-        return ViewProxyBuilder.callSuper(proxy, method, args);
+        TouchMessageManager.getInstance().printBefore(proxy, method, args);
+        Object result = ViewProxyBuilder.callSuper(proxy, method, args);
+        TouchMessageManager.getInstance().printAfter(proxy, method, args ,result);
+        return result;
     }
 }
