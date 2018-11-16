@@ -21,11 +21,8 @@ public class FilePrint implements Print {
 
     private static final String DIR = "SimpleTouch";
 
-
     @Override
-    public void printMessage(Message message) {
-
-    }
+    public void printMessage(Message message) {}
 
     @Override
     public void printMultipleMessage(List<Message> messages) {

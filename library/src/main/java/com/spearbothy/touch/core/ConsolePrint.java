@@ -17,7 +17,5 @@ public class ConsolePrint implements Print {
     }
 
     @Override
-    public void printMultipleMessage(List<Message> messages) {
-
-    }
+    public void printMultipleMessage(List<Message> messages) {}
 }

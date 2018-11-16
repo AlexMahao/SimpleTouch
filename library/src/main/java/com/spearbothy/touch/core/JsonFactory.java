@@ -72,7 +72,6 @@ public class JsonFactory {
             touchMethod.setResult(message.getResult());
             currentTouchView.getCalls().add(touchMethod);
 
-
             eventKey = message.getEvent();
         }
         // 添加最后一个
@@ -97,7 +96,6 @@ public class JsonFactory {
         }
         return root;
     }
-
 
     private static class JsonPrintEntity extends LinkedHashMap<String, List<JsonPrintEntity.TouchView>> {
 
@@ -207,6 +205,5 @@ public class JsonFactory {
                         '}';
             }
         }
-
     }
 }
