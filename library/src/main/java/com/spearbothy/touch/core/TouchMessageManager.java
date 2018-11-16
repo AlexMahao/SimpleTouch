@@ -2,6 +2,8 @@ package com.spearbothy.touch.core;
 
 import android.os.Handler;
 import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewParent;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -38,16 +40,20 @@ class TouchMessageManager {
     }
 
     void printBefore(Object proxy, Method method, Object[] args) {
-        Message message = buildMessage(proxy, method, args);
-        message.setBefore(true);
-        addMessage(message);
+        if (isBelongContentView((View) proxy)) {
+            Message message = buildMessage(proxy, method, args);
+            message.setBefore(true);
+            addMessage(message);
+        }
     }
 
     void printAfter(Object proxy, Method method, Object[] args, Object result) {
-        Message message = buildMessage(proxy, method, args);
-        message.setBefore(false);
-        message.setResult((Boolean) result);
-        addMessage(message);
+        if (isBelongContentView((View) proxy)) {
+            Message message = buildMessage(proxy, method, args);
+            message.setBefore(false);
+            message.setResult((Boolean) result);
+            addMessage(message);
+        }
     }
 
     private void addMessage(Message message) {
@@ -55,6 +61,19 @@ class TouchMessageManager {
         mConsolePrint.printMessage(message);
         handler.removeCallbacks(clear);
         handler.postDelayed(clear, CLEAR_DELAY);
+    }
+
+    private boolean isBelongContentView(View view) {
+        ViewParent parent = view.getParent();
+        if (parent instanceof View) {
+            View parentView = (View) parent;
+            if (parentView.getId() == android.R.id.content) {
+                return true;
+            } else {
+                return isBelongContentView(parentView);
+            }
+        }
+        return false;
     }
 
     private static Message buildMessage(Object proxy, Method method, Object[] args) {
