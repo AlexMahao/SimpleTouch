@@ -4,7 +4,6 @@ import android.text.TextUtils;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.annotation.JSONField;
-import com.alibaba.fastjson.serializer.SerializerFeature;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -102,9 +101,6 @@ public class JsonFactory {
 
     private static class JsonPrintEntity extends LinkedHashMap<String, List<JsonPrintEntity.TouchView>> {
 
-//        public static class TouchList extends LinkedHashMap<String, JsonPrintEntity.TouchLogDetail> {}
-
-
         public static class TouchView {
 
             @JSONField(ordinal = 0)
@@ -146,6 +142,16 @@ public class JsonFactory {
 
             public void setCalls(List<Object> calls) {
                 this.calls = calls;
+            }
+
+            @Override
+            public String toString() {
+                return "TouchView{" +
+                        "className='" + className + '\'' +
+                        ", id='" + id + '\'' +
+                        ", viewToken=" + viewToken +
+                        ", calls=" + calls +
+                        '}';
             }
         }
 
@@ -190,76 +196,13 @@ public class JsonFactory {
             public void setResult(Boolean result) {
                 this.result = result;
             }
-        }
-
-        public static class TouchLogDetail {
-            private String className;
-            private String method;
-            private String event;
-            private String direction;
-            private Boolean result = null;
-
-            public static TouchLogDetail getInstance(Message message) {
-                TouchLogDetail detail = new TouchLogDetail();
-                detail.setClassName(message.getClassName());
-                detail.setDirection(message.isBefore() ? ">>" : "<<");
-                detail.setEvent(message.getEvent());
-                detail.setMethod(message.getMethodName());
-                detail.setResult(message.getResult());
-                return detail;
-            }
-
-            public String getClassName() {
-                return className;
-            }
-
-            public void setClassName(String className) {
-                this.className = className;
-            }
-
-            public String getMethod() {
-                return method;
-            }
-
-            public void setMethod(String method) {
-                this.method = method;
-            }
-
-            public String getEvent() {
-                return event;
-            }
-
-            public void setEvent(String event) {
-                this.event = event;
-            }
-
-            public String getDirection() {
-                return direction;
-            }
-
-            public void setDirection(String direction) {
-                this.direction = direction;
-            }
-
-            public Boolean getResult() {
-                return result;
-            }
-
-            public void setResult(Boolean result) {
-                this.result = result;
-            }
-
-            public void setResult(boolean result) {
-                this.result = result;
-            }
 
             @Override
             public String toString() {
-                return "TouchLogDetail{" +
-                        "className='" + className + '\'' +
-                        ", method='" + method + '\'' +
-                        ", event='" + event + '\'' +
+                return "TouchMethod{" +
+                        "methodName='" + methodName + '\'' +
                         ", direction='" + direction + '\'' +
+                        ", event='" + event + '\'' +
                         ", result=" + result +
                         '}';
             }
