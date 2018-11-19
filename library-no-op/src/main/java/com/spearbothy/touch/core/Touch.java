@@ -5,8 +5,7 @@ import android.content.Context;
 /**
  * 空实现
  *
- * @author mahao
- * @date 2018/11/13 下午2:24
+ * @author mahao 2018/11/13 下午2:24
  */
 
 public class Touch {

@@ -13,8 +13,7 @@ import java.io.File;
 /**
  * 默认简单模式
  *
- * @author mahao
- * @date 2018/11/13 下午2:24
+ * @author mahao 2018/11/13 下午2:24
  */
 
 public class Touch {

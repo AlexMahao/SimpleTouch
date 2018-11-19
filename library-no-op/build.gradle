@@ -1,7 +1,5 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
-group = 'com.github.AlexMahao.SimpleTouch'
-version = library_version
+
 android {
     compileSdkVersion 26
 
@@ -23,3 +21,26 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 }
+
+apply plugin: 'com.novoda.bintray-release'
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+publish {
+    artifactId = 'simple-touch-no-op'
+    uploadName = 'SimpleTouch-NO-OP'
+    publishVersion = '1.0.1'
+
+    userOrg = rootProject.ext.userOrg
+    repoName = rootProject.ext.repoName
+    groupId = rootProject.ext.groupId
+    desc = rootProject.ext.desc
+    website = rootProject.ext.website
+    licences = rootProject.ext.licences
+    bintrayUser = properties.getProperty("bintray.user")
+    bintrayKey = properties.getProperty("bintray.apikey")
+    dryRun = false
+}
+
+// ./gradlew library-no-op:clean library-no-op:build library-no-op:bintrayUpload

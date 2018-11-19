@@ -1,10 +1,8 @@
 package com.spearbothy.touch.core;
 
 /**
- * @author mahao
- * @date 2018/11/13 下午5:01
+ * @author mahao 2018/11/13 下午5:01
  */
-
 public class Message {
 
     private String className;

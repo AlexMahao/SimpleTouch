@@ -8,8 +8,10 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.1'
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
 
+        classpath 'com.novoda:bintray-release:0.8.1'
+//        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.0'
+//        classpath 'com.github.dcendents:android-maven-plugin:1.2'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -19,14 +21,18 @@ allprojects {
     repositories {
         google()
         jcenter()
-        maven { url "https://jitpack.io" }
+        maven {url "https://dl.bintray.com/alexsmille/maven"}
     }
 }
 
 ext {
-    library_version = "1.0.3"
+    userOrg = 'alexsmille'
+    repoName = "maven"
+    groupId = 'com.spearbothy'
+    desc = 'simple touch for android'
+    website = 'https://github.com/AlexMahao/SimpleTouch'
+    licences = ['Apache-2.0']
 }
-
 
 task clean(type: Delete) {
     delete rootProject.buildDir

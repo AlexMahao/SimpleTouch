@@ -8,8 +8,7 @@ import com.spearbothy.touch.core.Touch;
 import java.util.List;
 
 /**
- * @author mahao
- * @date 2018/11/15 下午3:18
+ * @author mahao 2018/11/15 下午3:18
  */
 
 public class ConsolePrint implements Print {

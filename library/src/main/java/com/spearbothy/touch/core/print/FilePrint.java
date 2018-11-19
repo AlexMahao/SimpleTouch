@@ -16,8 +16,7 @@ import java.io.PrintStream;
 import java.util.List;
 
 /**
- * @author mahao
- * @date 2018/11/15 下午3:19
+ * @author mahao 2018/11/15 下午3:19
  */
 
 public class FilePrint implements Print {

@@ -4,8 +4,7 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 
 /**
- * @author mahao
- * @date 2018/11/13 下午2:20
+ * @author mahao 2018/11/13 下午2:20
  */
 
 public class TouchHandler implements InvocationHandler {

@@ -14,8 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author mahao
- * @date 2018/11/9 上午10:35
+ * @author mahao 2018/11/9 上午10:35
  */
 
 public class ViewFactory implements LayoutInflater.Factory {

@@ -5,8 +5,7 @@ import com.spearbothy.touch.core.Message;
 import java.util.List;
 
 /**
- * @author mahao
- * @date 2018/11/15 下午3:19
+ * @author mahao 2018/11/15 下午3:19
  */
 
 public interface Print {

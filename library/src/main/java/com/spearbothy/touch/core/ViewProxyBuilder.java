@@ -33,8 +33,7 @@ import static java.lang.reflect.Modifier.PUBLIC;
 import static java.lang.reflect.Modifier.STATIC;
 
 /**
- * @author mahao
- * @date 2018/11/13 下午1:48
+ * @author mahao 2018/11/13 下午1:48
  */
 
 public final class ViewProxyBuilder<T> {

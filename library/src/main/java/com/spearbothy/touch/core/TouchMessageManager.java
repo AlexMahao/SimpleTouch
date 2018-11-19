@@ -14,8 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author mahao
- * @date 2018/11/13 下午2:32
+ * @author mahao 2018/11/13 下午2:32
  */
 
 class TouchMessageManager {

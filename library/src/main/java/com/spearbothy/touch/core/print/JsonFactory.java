@@ -11,8 +11,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 /**
- * @author mahao
- * @date 2018/11/15 下午3:05
+ * @author mahao 2018/11/15 下午3:05
  */
 
 public class JsonFactory {

@@ -1,9 +1,5 @@
 apply plugin: 'com.android.library'
 
-apply plugin: 'com.github.dcendents.android-maven'
-group='com.github.AlexMahao.SimpleTouch'
-version = library_version
-
 android {
     compileSdkVersion 26
 
@@ -20,6 +16,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    android {
+        lintOptions {
+            abortOnError false
+        }
+    }
+
 }
 
 dependencies {
@@ -27,4 +30,25 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.google.dexmaker:dexmaker:1.2'
     implementation 'com.alibaba:fastjson:1.1.67.android'
+}
+
+apply plugin: 'com.novoda.bintray-release'
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+publish {
+    artifactId = 'simple-touch'
+    uploadName = 'SimpleTouch'
+    publishVersion = '1.0.0'
+
+    userOrg = rootProject.ext.userOrg
+    repoName = rootProject.ext.repoName
+    groupId = rootProject.ext.groupId
+    desc = rootProject.ext.desc
+    website = rootProject.ext.website
+    licences = rootProject.ext.licences
+    bintrayUser = properties.getProperty("bintray.user")
+    bintrayKey = properties.getProperty("bintray.apikey")
+    dryRun = false
 }
