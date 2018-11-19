@@ -21,5 +21,6 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     api 'com.android.support:appcompat-v7:26.1.0'
-    implementation 'com.github.AlexMahao.SimpleTouch:library:master-SNAPSHOT'
+    debugApi project(':library')
+    releaseApi project(':library-no-op')
 }
