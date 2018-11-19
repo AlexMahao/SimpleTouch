@@ -2,7 +2,6 @@ apply plugin: 'com.android.library'
 
 apply plugin: 'com.github.dcendents.android-maven'
 group='com.github.AlexMahao.SimpleTouch'
-version = library_version
 
 android {
     compileSdkVersion 26
