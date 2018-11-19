@@ -20,8 +20,12 @@ allprojects {
     repositories {
         google()
         jcenter()
-
+        maven { url 'https://jitpack.io' }
     }
+}
+
+ext {
+    library_version = "1.0.1"
 }
 
 task clean(type: Delete) {
