@@ -1,9 +1,12 @@
-package com.spearbothy.touch.core;
+package com.spearbothy.touch.core.print;
 
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Log;
+
+import com.spearbothy.touch.core.Message;
+import com.spearbothy.touch.core.Touch;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -30,7 +33,6 @@ public class FilePrint implements Print {
     }
 
     private class WriterFileTask extends AsyncTask<String, Void, String> {
-
 
         @Override
         protected String doInBackground(String... params) {
@@ -84,10 +86,7 @@ public class FilePrint implements Print {
         }
     }
 
-
     public static boolean isExternalStorageAvailable() {
         return Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
     }
-
-
 }

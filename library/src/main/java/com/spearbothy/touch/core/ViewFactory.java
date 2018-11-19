@@ -1,7 +1,6 @@
 package com.spearbothy.touch.core;
 
 import android.content.Context;
-import android.util.ArrayMap;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.InflateException;
@@ -10,6 +9,8 @@ import android.view.View;
 
 import java.io.IOException;
 import java.lang.reflect.Constructor;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -25,7 +26,7 @@ public class ViewFactory implements LayoutInflater.Factory {
 
     private static final Class<?>[] sConstructorSignature = new Class[]{Context.class, AttributeSet.class};
     private final Object[] mConstructorArgs = new Object[2];
-    private static final Map<String, Constructor<? extends View>> sConstructorMap = new ArrayMap<>();
+    private static final Map<String, Constructor<? extends View>> sConstructorMap = new HashMap<>();
 
     @Override
     public View onCreateView(String name, Context context, AttributeSet attrs) {
@@ -49,9 +50,7 @@ public class ViewFactory implements LayoutInflater.Factory {
                     .dexCache(view.getContext().getDir(Touch.DEX_CACHE_DIR, Context.MODE_PRIVATE))
                     .constructorArgTypes(Context.class, AttributeSet.class)
                     .constructorArgValues(view.getContext(), attrs)
-                    .addProxyMethod("dispatchTouchEvent")
-                    .addProxyMethod("onTouchEvent")
-                    .addProxyMethod("onInterceptTouchEvent")
+                    .addProxyMethod(Arrays.asList(Touch.sProxyMethods))
                     .build();
         } catch (IOException e) {
             return null;

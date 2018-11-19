@@ -1,4 +1,6 @@
-package com.spearbothy.touch.core;
+package com.spearbothy.touch.core.print;
+
+import com.spearbothy.touch.core.Message;
 
 import java.util.List;
 

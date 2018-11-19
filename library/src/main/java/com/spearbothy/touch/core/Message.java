@@ -13,11 +13,29 @@ public class Message {
     private boolean before;
     private Boolean result;
     private int viewToken;
+    private String id;
+    private String absClassName;
 
     public Message(String className, String methodName, String event) {
         this.className = className;
         this.methodName = methodName;
         this.event = event;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getAbsClassName() {
+        return absClassName;
+    }
+
+    public void setAbsClassName(String absClassName) {
+        this.absClassName = absClassName;
     }
 
     public String getClassName() {
@@ -72,8 +90,23 @@ public class Message {
         this.result = result;
     }
 
+    public String getSimplePrintMessage() {
+        StringBuffer sb = new StringBuffer("class:" + className
+                + " method:" + methodName
+                + " event:" + event);
+        if (isBefore()) {
+            sb.append(" >>");
+        } else {
+            sb.append(" << ").append(result);
+        }
+        return sb.toString();
+    }
+
     public String getPrintMessage() {
-        StringBuffer sb = new StringBuffer("class:" + className + " method:" + methodName + " event:" + event);
+        StringBuffer sb = new StringBuffer("absClassName:" + absClassName
+                + " id:" + id
+                + " method:" + methodName
+                + " event:" + event);
         if (isBefore()) {
             sb.append(" >>");
         } else {

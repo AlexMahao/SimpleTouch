@@ -85,6 +85,11 @@ public final class ViewProxyBuilder<T> {
         return this;
     }
 
+    public ViewProxyBuilder<T> addProxyMethod(List<String> methods) {
+        proxyMethods.addAll(methods);
+        return this;
+    }
+
     /**
      * Sets the directory where executable code is stored. See {@link
      * DexMaker#generateAndLoad DexMaker.generateAndLoad()} for guidance on

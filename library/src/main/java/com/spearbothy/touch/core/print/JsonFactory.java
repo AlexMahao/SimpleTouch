@@ -1,9 +1,10 @@
-package com.spearbothy.touch.core;
+package com.spearbothy.touch.core.print;
 
 import android.text.TextUtils;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.annotation.JSONField;
+import com.spearbothy.touch.core.Message;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -18,9 +19,7 @@ public class JsonFactory {
 
     public static String toJson(List<Message> messagesList) {
         JsonPrintEntity data = new JsonPrintEntity();
-        // 区分不同的事件
         List<JsonPrintEntity.TouchView> touchLogs = new ArrayList<>();
-        // 区分不同的事件开始
         JsonPrintEntity.TouchView rootTouchView = new JsonPrintEntity.TouchView();
         String eventKey = "";
         for (int i = 0; i < messagesList.size(); i++) {
@@ -44,8 +43,7 @@ public class JsonFactory {
             }
 
             if (rootTouchView.getViewToken() == 0) {
-                rootTouchView.setClassName(message.getClassName());
-                rootTouchView.setViewToken(message.getViewToken());
+                rootTouchView.init(message);
             }
 
             // calls 方法判断规则
@@ -59,8 +57,7 @@ public class JsonFactory {
             } else {
                 // viewToken不存在
                 currentTouchView = new JsonPrintEntity.TouchView();
-                currentTouchView.setClassName(message.getClassName());
-                currentTouchView.setViewToken(message.getViewToken());
+                currentTouchView.init(message);
                 findTouchView.getCalls().add(currentTouchView);
             }
 
@@ -103,12 +100,29 @@ public class JsonFactory {
 
             @JSONField(ordinal = 0)
             private String className;
+            @JSONField(ordinal = 5)
+            private String absClassName;
             @JSONField(ordinal = 10)
             private String id;
-            @JSONField(ordinal = 20)
+            @JSONField(ordinal = 20, serialize = false)
             private int viewToken;
             @JSONField(ordinal = 30)
             private List<Object> calls = new ArrayList<>(); // 包含 TouchView 和 TouchMethod
+
+            public String getAbsClassName() {
+                return absClassName;
+            }
+
+            public void setAbsClassName(String absClassName) {
+                this.absClassName = absClassName;
+            }
+
+            public void init(Message message) {
+                setClassName(message.getClassName());
+                setViewToken(message.getViewToken());
+                setId(message.getId());
+                setAbsClassName(message.getAbsClassName());
+            }
 
             public int getViewToken() {
                 return viewToken;

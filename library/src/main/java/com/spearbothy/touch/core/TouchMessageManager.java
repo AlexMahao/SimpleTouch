@@ -5,6 +5,10 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewParent;
 
+import com.spearbothy.touch.core.print.ConsolePrint;
+import com.spearbothy.touch.core.print.FilePrint;
+import com.spearbothy.touch.core.print.Print;
+
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -77,8 +81,8 @@ class TouchMessageManager {
     }
 
     private static Message buildMessage(Object proxy, Method method, Object[] args) {
-
-        String className = proxy.getClass().getSuperclass().getSimpleName();
+        View view = (View) proxy;
+        String className = view.getClass().getSuperclass().getSimpleName();
         String methodName = method.getName();
         String eventStr = "";
         Object arg = args[0];
@@ -87,8 +91,15 @@ class TouchMessageManager {
             eventStr = MotionEvent.actionToString(event.getAction());
         }
         Message message = new Message(className, methodName, eventStr);
-        message.setViewToken(proxy.hashCode());
+        message.setViewToken(view.hashCode());
+        message.setId(getId(view));
+        message.setAbsClassName(view.getClass().getSuperclass().getName());
         return message;
+    }
+
+    public static String getId(View view) {
+        if (view.getId() == 0xffffffff) return "no-id";
+        else return view.getResources().getResourceName(view.getId());
     }
 
     private void clearMessage() {
