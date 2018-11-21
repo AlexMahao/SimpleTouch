@@ -9,6 +9,7 @@ import android.view.View;
 
 import java.io.IOException;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Modifier;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,6 +39,9 @@ public class ViewFactory implements LayoutInflater.Factory {
         }
         if (view == null) {
             return null;
+        }
+        if ((view.getClass().getModifiers() & Modifier.FINAL) != 0) {
+            return view;
         }
         return proxy(view, attrs);
     }

@@ -7,7 +7,6 @@ import com.alibaba.fastjson.annotation.JSONField;
 import com.spearbothy.touch.core.Message;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 /**
@@ -18,25 +17,17 @@ public class JsonFactory {
 
     public static String toJson(List<Message> messagesList) {
         JsonPrintEntity data = new JsonPrintEntity();
-        List<JsonPrintEntity.TouchView> touchLogs = new ArrayList<>();
         JsonPrintEntity.TouchView rootTouchView = new JsonPrintEntity.TouchView();
         String eventKey = "";
         for (int i = 0; i < messagesList.size(); i++) {
             Message message = messagesList.get(i);
-            if (!message.getEvent().equals(eventKey)) {
-                if (!TextUtils.isEmpty(eventKey)) {
-                    touchLogs.add(rootTouchView);
-                    data.put(eventKey, touchLogs);
-                    touchLogs = new ArrayList<>();
-                    rootTouchView = new JsonPrintEntity.TouchView();
-                }
-            }
-
             if (message.getViewToken() == rootTouchView.getViewToken()
                     && message.isBefore()
-                    && "dispatchTouchEvent".equals(message.getEvent())
+                    && "dispatchTouchEvent".equals(message.getMethodName())
                     ) {
-                touchLogs.add(rootTouchView);
+                if (data.isEmpty() || !data.get(data.size() - 1).equals(rootTouchView)) {
+                    data.add(rootTouchView);
+                }
                 // 边界 开始下一次
                 rootTouchView = new JsonPrintEntity.TouchView();
             }
@@ -72,8 +63,9 @@ public class JsonFactory {
         }
         // 添加最后一个
         if (!TextUtils.isEmpty(eventKey)) {
-            touchLogs.add(rootTouchView);
-            data.put(eventKey, touchLogs);
+            if (data.isEmpty() || !data.get(data.size() - 1).equals(rootTouchView)) {
+                data.add(rootTouchView);
+            }
         }
 
         return JSON.toJSONString(data, true);
@@ -93,7 +85,7 @@ public class JsonFactory {
         return root;
     }
 
-    private static class JsonPrintEntity extends LinkedHashMap<String, List<JsonPrintEntity.TouchView>> {
+    private static class JsonPrintEntity extends ArrayList<JsonPrintEntity.TouchView> {
 
         public static class TouchView {
 
@@ -121,6 +113,32 @@ public class JsonFactory {
                 setViewToken(message.getViewToken());
                 setId(message.getId());
                 setAbsClassName(message.getAbsClassName());
+            }
+
+            @Override
+            public boolean equals(Object o) {
+                if (this == o) return true;
+                if (o == null || getClass() != o.getClass()) return false;
+
+                TouchView touchView = (TouchView) o;
+
+                if (viewToken != touchView.viewToken) return false;
+                if (className != null ? !className.equals(touchView.className) : touchView.className != null)
+                    return false;
+                if (absClassName != null ? !absClassName.equals(touchView.absClassName) : touchView.absClassName != null)
+                    return false;
+                if (id != null ? !id.equals(touchView.id) : touchView.id != null) return false;
+                return calls != null ? calls.equals(touchView.calls) : touchView.calls == null;
+            }
+
+            @Override
+            public int hashCode() {
+                int result = className != null ? className.hashCode() : 0;
+                result = 31 * result + (absClassName != null ? absClassName.hashCode() : 0);
+                result = 31 * result + (id != null ? id.hashCode() : 0);
+                result = 31 * result + viewToken;
+                result = 31 * result + (calls != null ? calls.hashCode() : 0);
+                return result;
             }
 
             public int getViewToken() {
@@ -175,6 +193,30 @@ public class JsonFactory {
             private String event;
             @JSONField(ordinal = 30)
             private Boolean result;
+
+            @Override
+            public boolean equals(Object o) {
+                if (this == o) return true;
+                if (o == null || getClass() != o.getClass()) return false;
+
+                TouchMethod that = (TouchMethod) o;
+
+                if (methodName != null ? !methodName.equals(that.methodName) : that.methodName != null)
+                    return false;
+                if (direction != null ? !direction.equals(that.direction) : that.direction != null)
+                    return false;
+                if (event != null ? !event.equals(that.event) : that.event != null) return false;
+                return result != null ? result.equals(that.result) : that.result == null;
+            }
+
+            @Override
+            public int hashCode() {
+                int result1 = methodName != null ? methodName.hashCode() : 0;
+                result1 = 31 * result1 + (direction != null ? direction.hashCode() : 0);
+                result1 = 31 * result1 + (event != null ? event.hashCode() : 0);
+                result1 = 31 * result1 + (result != null ? result.hashCode() : 0);
+                return result1;
+            }
 
             public String getMethodName() {
                 return methodName;
