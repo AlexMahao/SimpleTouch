@@ -18,7 +18,7 @@
 
 对于一次完整的手指点击，事件分发的控制台日志如下
 
-![](simple_touch1.png)
+![](img/simple_touch_console.png)
 
 ### 支持功能
 
