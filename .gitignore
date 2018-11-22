@@ -26,3 +26,4 @@ app/build
 *.apk
 *output.json
 *.patch.*.jar
+gradle.properties
