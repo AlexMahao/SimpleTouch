@@ -1,5 +1,7 @@
 
-<center> ![](img/simple_touch_log.png) </center>
+![](img/simple_touch_log.png)
+
+<br/>
 
 > 一个用于监听android事件分发流程的库，两行代码即可在运行时期监听事件的分发流程。
 
