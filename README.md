@@ -46,7 +46,7 @@ releaseApi 'com.spearbothy:simple-touch-no-op:1.0.3'
 
 #### 初始化
 
-在项目的`Application`的`onCreate()`中调用初始化方法
+在项目的`Application`的`onCreate()`中调用初始化方法`Touch.inject(this);`
 
 ```java
 Touch.init(this, new Config().setSimple(false));
