@@ -37,15 +37,17 @@ public class Config {
         return isRepeat;
     }
 
-    public void setRepeat(boolean repeat) {
+    public Config setRepeat(boolean repeat) {
         isRepeat = repeat;
+        return this;
     }
 
     public boolean isPrint2File() {
         return isPrint2File;
     }
 
-    public void setPrint2File(boolean print2File) {
+    public Config setPrint2File(boolean print2File) {
         isPrint2File = print2File;
+        return this;
     }
 }
