@@ -1,8 +1,7 @@
 package com.spearbothy.touch.core;
 
 /**
- * @author mahao
- * @date 2018/11/22 上午10:39
+ * @author mahao 2018/11/22 上午10:39
  */
 
 public class Config {
