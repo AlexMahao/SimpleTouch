@@ -37,8 +37,8 @@
 在项目的`app`下的`build.gradle`中添加依赖
 
 ```
-debugApi 'com.spearbothy:simple-touch:1.0.2'
-releaseApi 'com.spearbothy:simple-touch-no-op:1.0.2'
+debugApi 'com.spearbothy:simple-touch:1.0.3'
+releaseApi 'com.spearbothy:simple-touch-no-op:1.0.3'
 ```
 
 #### 初始化
@@ -88,6 +88,34 @@ public class Config {
 #### 备注
 
 - 提供了`no-op`版本，该版本中包含有初始化和注入方法的空实现，以达到`debug`和`release`使用不同的版本，使`release`不包含任何注入和初始化逻辑。
+
+
+### 功能列表
+
+#### `Config`配置说明
+
+在初始化时，可以传入`Config`添加自定义配置，现提供的配置选项如下：
+
+- `setSimple` : `log`是否已简单的模式进行输出，每一条`log`的详细程度。
+- `setDelay` : 是否延迟打印日志，在控制台打印日志分为两种，一种是边触摸边打印(false)，一种是这次完成之后再打印(true)。延迟打印的好处在于，对于一次触摸可能会有多次`MOVE`事件，延迟打印可以对日志进行去重
+- `setRepeat` : 是否去重，主要用于延迟打印和输出到文件时。
+- `setPrint2File` : 是否将此次触摸日志保存到文件中。
+
+
+#### 保存到文件说明
+
+对于一次触摸事件，通过`logcat`显示，会有一种密密麻麻的感觉，不太好展示层次逻辑等。最好的方式其实是生成流程图，但是暂时没有好的想法生成流程图，最终以`json`的方式输出到文件中。
+
+`json`具有一定的层次结构，所以在输出时加入了一些对应的结构话，便于展示事件流程。
+
+对于一次手指按下到离开的操作，会有多次以根节点到子节点的方法调用，那么每一次完整的方法调用认为是一次流程，及每一次完整的方法调用可以是指`DOWN`或者`UP`或者`MOVE`等。
+
+每一次完整的方法调用认为是一个对象，多次以一个数组的形式进行组装。
+
+![](img/simple_touch_file.png)
+
+在这个流程图中，`calls`是一个数组，代表方法的调用，包含当前类的方法以及对应子`View`的方法。
+
 
 ### 关于
 
