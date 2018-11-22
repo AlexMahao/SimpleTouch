@@ -2,6 +2,7 @@ package com.spearbothy.simpletouch;
 
 import android.app.Application;
 
+import com.spearbothy.touch.core.Config;
 import com.spearbothy.touch.core.Touch;
 
 /**
@@ -14,6 +15,6 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        Touch.init(this);
+        Touch.init(this, new Config().setSimple(false));
     }
 }

@@ -1,41 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/root"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <ScrollView
-        android:id="@+id/scroll_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <LinearLayout
-            android:id="@+id/list"
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <TextView
-                android:background="@color/colorPrimary"
-                android:textColor="@android:color/white"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:text="Hello World!" />
-            <com.spearbothy.simpletouch.CustomView
-                android:clickable="true"
-                android:layout_marginTop="20dp"
-                android:background="@color/colorPrimary"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:textColor="@android:color/white"
-                android:text="Custom View" />
-            <Button
-                android:id="@+id/button"
-                android:layout_marginTop="20dp"
-                android:background="@color/colorPrimary"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:textColor="@android:color/white"
-                android:text="button" />
-        </LinearLayout>
-    </ScrollView>
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@color/colorPrimary"
+        android:text="Hello World!"
+        android:textColor="@android:color/white" />
+    <com.spearbothy.simpletouch.CustomView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorPrimary"
+        android:clickable="true"
+        android:text="Custom View"
+        android:textColor="@android:color/white" />
+    <Button
+        android:id="@+id/button"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/colorPrimary"
+        android:text="button"
+        android:textColor="@android:color/white" />
 </LinearLayout>

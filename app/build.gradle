@@ -8,7 +8,6 @@ android {
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -21,9 +20,9 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     api 'com.android.support:appcompat-v7:26.1.0'
-//    debugApi 'com.spearbothy:simple-touch:1.0.0'
-//    releaseApi 'com.spearbothy:simple-touch-no-op:1.0.1'
+    debugApi 'com.spearbothy:simple-touch:1.0.2'
+    releaseApi 'com.spearbothy:simple-touch-no-op:1.0.2'
 
-    debugApi project(":library")
-    releaseApi project(":library-no-op")
+//    debugApi project(":library")
+//    releaseApi project(":library-no-op")
 }
