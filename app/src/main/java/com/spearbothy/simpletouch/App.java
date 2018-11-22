@@ -14,6 +14,6 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        Touch.init(this , false);
+        Touch.init(this);
     }
 }

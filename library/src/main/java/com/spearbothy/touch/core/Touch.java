@@ -18,30 +18,20 @@ import java.io.File;
 
 public class Touch {
 
-    static final String DEX_CACHE_DIR = "proxy";
+    public static String sHostPackage = "";
 
-    public static final String LOG_TAG = "SimpleTouch";
-
-    public static boolean sSimple;
-
-    public static String HOST_PACKAGE_NAME = "";
-
-    public static String[] sProxyMethods = {
-            "dispatchTouchEvent",
-            "onTouchEvent",
-            "onInterceptTouchEvent"
-    };
+    public static Config sConfig;
 
     public static void init(Context context) {
-        init(context, true);
+        init(context, new Config());
     }
 
-    public static void init(Context context, boolean simple) {
-        File dir = context.getDir(DEX_CACHE_DIR, Context.MODE_PRIVATE);
+    public static void init(Context context, Config config) {
+        File dir = context.getDir(Constants.DEX_CACHE_DIR, Context.MODE_PRIVATE);
         dir.delete();
 
-        HOST_PACKAGE_NAME = context.getPackageName();
-        sSimple = simple;
+        sHostPackage = context.getPackageName();
+        sConfig = config;
     }
 
     public static void inject(Context context) {

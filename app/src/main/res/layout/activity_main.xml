@@ -5,19 +5,37 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <TextView
-        android:clickable="true"
-        android:background="@color/colorPrimary"
-        android:textColor="@android:color/white"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:text="Hello World!" />
-    <com.spearbothy.simpletouch.CustomView
-        android:clickable="true"
-        android:layout_marginTop="20dp"
-        android:background="@color/colorPrimary"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:textColor="@android:color/white"
-        android:text="Custom View" />
+    <ScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/list"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:background="@color/colorPrimary"
+                android:textColor="@android:color/white"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:text="Hello World!" />
+            <com.spearbothy.simpletouch.CustomView
+                android:clickable="true"
+                android:layout_marginTop="20dp"
+                android:background="@color/colorPrimary"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:textColor="@android:color/white"
+                android:text="Custom View" />
+            <Button
+                android:id="@+id/button"
+                android:layout_marginTop="20dp"
+                android:background="@color/colorPrimary"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:textColor="@android:color/white"
+                android:text="button" />
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

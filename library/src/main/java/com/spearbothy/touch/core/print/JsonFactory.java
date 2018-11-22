@@ -1,7 +1,5 @@
 package com.spearbothy.touch.core.print;
 
-import android.text.TextUtils;
-
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.spearbothy.touch.core.Message;
@@ -18,17 +16,13 @@ public class JsonFactory {
     public static String toJson(List<Message> messagesList) {
         JsonPrintEntity data = new JsonPrintEntity();
         JsonPrintEntity.TouchView rootTouchView = new JsonPrintEntity.TouchView();
-        String eventKey = "";
         for (int i = 0; i < messagesList.size(); i++) {
             Message message = messagesList.get(i);
             if (message.getViewToken() == rootTouchView.getViewToken()
                     && message.isBefore()
                     && "dispatchTouchEvent".equals(message.getMethodName())
                     ) {
-                if (data.isEmpty() || !data.get(data.size() - 1).equals(rootTouchView)) {
-                    data.add(rootTouchView);
-                }
-                // 边界 开始下一次
+                data.add(rootTouchView);
                 rootTouchView = new JsonPrintEntity.TouchView();
             }
 
@@ -58,14 +52,9 @@ public class JsonFactory {
             touchMethod.setMethodName(message.getMethodName());
             touchMethod.setResult(message.getResult());
             currentTouchView.getCalls().add(touchMethod);
-
-            eventKey = message.getEvent();
         }
-        // 添加最后一个
-        if (!TextUtils.isEmpty(eventKey)) {
-            if (data.isEmpty() || !data.get(data.size() - 1).equals(rootTouchView)) {
-                data.add(rootTouchView);
-            }
+        if (rootTouchView.getViewToken() != 0) {
+            data.add(rootTouchView);
         }
 
         return JSON.toJSONString(data, true);

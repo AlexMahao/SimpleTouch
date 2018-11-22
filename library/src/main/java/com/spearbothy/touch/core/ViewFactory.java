@@ -50,10 +50,10 @@ public class ViewFactory implements LayoutInflater.Factory {
         try {
             return ViewProxyBuilder.forClass(view.getClass())
                     .handler(new TouchHandler())
-                    .dexCache(view.getContext().getDir(Touch.DEX_CACHE_DIR, Context.MODE_PRIVATE))
+                    .dexCache(view.getContext().getDir(Constants.DEX_CACHE_DIR, Context.MODE_PRIVATE))
                     .constructorArgTypes(Context.class, AttributeSet.class)
                     .constructorArgValues(view.getContext(), attrs)
-                    .addProxyMethod(Arrays.asList(Touch.sProxyMethods))
+                    .addProxyMethod(Arrays.asList(Constants.PROXY_METHODS))
                     .build();
         } catch (IOException e) {
             return null;

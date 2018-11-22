@@ -5,6 +5,7 @@ import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.spearbothy.touch.core.Constants;
 import com.spearbothy.touch.core.Message;
 import com.spearbothy.touch.core.Touch;
 
@@ -42,13 +43,13 @@ public class FilePrint implements Print {
             if (!isExternalStorageAvailable()) {
                 return "存储不可用";
             }
-            if (TextUtils.isEmpty(Touch.HOST_PACKAGE_NAME)) {
+            if (TextUtils.isEmpty(Touch.sHostPackage)) {
                 return "请先调用Touch.init(context)完成初始化";
             }
 
             String absFileDir = Environment.getExternalStorageDirectory() + File.separator + DIR;
 
-            String absFileName = absFileDir + File.separator + Touch.HOST_PACKAGE_NAME + "_" + System.currentTimeMillis() + "_log.txt";
+            String absFileName = absFileDir + File.separator + Touch.sHostPackage + "_" + System.currentTimeMillis() + "_log.txt";
 
             File parentFile = new File(absFileDir);
 
@@ -81,7 +82,7 @@ public class FilePrint implements Print {
 
         @Override
         protected void onPostExecute(String result) {
-            Log.e(Touch.LOG_TAG, result);
+            Log.e(Constants.LOG_TAG, result);
         }
     }
 

@@ -20,6 +20,38 @@ public class Message {
         this.event = event;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Message message = (Message) o;
+
+        if (before != message.before) return false;
+        if (viewToken != message.viewToken) return false;
+        if (className != null ? !className.equals(message.className) : message.className != null)
+            return false;
+        if (methodName != null ? !methodName.equals(message.methodName) : message.methodName != null)
+            return false;
+        if (event != null ? !event.equals(message.event) : message.event != null) return false;
+        if (result != null ? !result.equals(message.result) : message.result != null) return false;
+        if (id != null ? !id.equals(message.id) : message.id != null) return false;
+        return absClassName != null ? absClassName.equals(message.absClassName) : message.absClassName == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result1 = className != null ? className.hashCode() : 0;
+        result1 = 31 * result1 + (methodName != null ? methodName.hashCode() : 0);
+        result1 = 31 * result1 + (event != null ? event.hashCode() : 0);
+        result1 = 31 * result1 + (before ? 1 : 0);
+        result1 = 31 * result1 + (result != null ? result.hashCode() : 0);
+        result1 = 31 * result1 + viewToken;
+        result1 = 31 * result1 + (id != null ? id.hashCode() : 0);
+        result1 = 31 * result1 + (absClassName != null ? absClassName.hashCode() : 0);
+        return result1;
+    }
+
     public String getId() {
         return id;
     }

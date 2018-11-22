@@ -61,7 +61,9 @@ class TouchMessageManager {
 
     private void addMessage(Message message) {
         messagesList.add(message);
-        mConsolePrint.printMessage(message);
+        if (!Touch.sConfig.isDelay()) {
+            mConsolePrint.printMessage(message);
+        }
         handler.removeCallbacks(clear);
         handler.postDelayed(clear, CLEAR_DELAY);
     }
@@ -87,13 +89,96 @@ class TouchMessageManager {
         Object arg = args[0];
         if (arg instanceof MotionEvent) {
             MotionEvent event = (MotionEvent) arg;
-            eventStr = MotionEvent.actionToString(event.getAction());
+            eventStr = actionToString(event.getAction());
         }
         Message message = new Message(className, methodName, eventStr);
         message.setViewToken(view.hashCode());
         message.setId(getId(view));
         message.setAbsClassName(view.getClass().getSuperclass().getName());
         return message;
+    }
+
+    /**
+     * from MotionEvent.actionToString()
+     */
+    public static String actionToString(int action) {
+        switch (action) {
+            case MotionEvent.ACTION_DOWN:
+                return "ACTION_DOWN";
+            case MotionEvent.ACTION_UP:
+                return "ACTION_UP";
+            case MotionEvent.ACTION_CANCEL:
+                return "ACTION_CANCEL";
+            case MotionEvent.ACTION_OUTSIDE:
+                return "ACTION_OUTSIDE";
+            case MotionEvent.ACTION_MOVE:
+                return "ACTION_MOVE";
+            case MotionEvent.ACTION_HOVER_MOVE:
+                return "ACTION_HOVER_MOVE";
+            case MotionEvent.ACTION_SCROLL:
+                return "ACTION_SCROLL";
+            case MotionEvent.ACTION_HOVER_ENTER:
+                return "ACTION_HOVER_ENTER";
+            case MotionEvent.ACTION_HOVER_EXIT:
+                return "ACTION_HOVER_EXIT";
+            case MotionEvent.ACTION_BUTTON_PRESS:
+                return "ACTION_BUTTON_PRESS";
+            case MotionEvent.ACTION_BUTTON_RELEASE:
+                return "ACTION_BUTTON_RELEASE";
+        }
+        int index = (action & MotionEvent.ACTION_POINTER_INDEX_MASK) >> MotionEvent.ACTION_POINTER_INDEX_SHIFT;
+        switch (action & MotionEvent.ACTION_MASK) {
+            case MotionEvent.ACTION_POINTER_DOWN:
+                return "ACTION_POINTER_DOWN(" + index + ")";
+            case MotionEvent.ACTION_POINTER_UP:
+                return "ACTION_POINTER_UP(" + index + ")";
+            default:
+                return Integer.toString(action);
+        }
+    }
+
+    public List<Message> filter(List<Message> messages) {
+        List<Message> result = new ArrayList<>();
+        // 去重操作
+        List<Message> prev = new ArrayList<>();
+        List<Message> next = new ArrayList<>();
+        for (int i = 0; i < messages.size(); i++) {
+            Message message = messages.get(i);
+            if (message.isBefore() && Constants.DISPATCH_TOUCH_EVENT.equals(message.getMethodName())) {
+                if (prev.isEmpty()) {
+                    if (!next.isEmpty() && next.get(0).getViewToken() == message.getViewToken()) {
+                        // 达到边界条件，重置数据
+                        prepareNext(result, prev, next);
+                    }
+                } else {
+                    if (prev.get(0).getViewToken() == message.getViewToken()) {
+                        // 达到边界条件，重置数据
+                        prepareNext(result, prev, next);
+                    }
+                }
+
+            }
+            next.add(message);
+        }
+
+        // 最后一次
+        if (!prev.equals(next) && !next.isEmpty()) {
+            // 如果相等，抛弃数据
+            result.addAll(next);
+        }
+        return result;
+    }
+
+    public void prepareNext(List<Message> result, List<Message> prev, List<Message> next) {
+        if (prev.equals(next)) {
+            // 如果相等，抛弃数据
+            next.clear();
+        } else {
+            result.addAll(next);
+            prev.clear();
+            prev.addAll(next);
+            next.clear();
+        }
     }
 
     public static String getId(View view) {
@@ -105,10 +190,18 @@ class TouchMessageManager {
         if (messagesList.isEmpty()) {
             return;
         }
-        List<Message> writeMessageList = new ArrayList<>(messagesList);
-
-        mFilePrint.printMultipleMessage(writeMessageList);
-
+        List<Message> printMessageList;
+        if (Touch.sConfig.isRepeat()) {
+            printMessageList = new ArrayList<>(messagesList);
+        } else {
+            printMessageList = filter(messagesList);
+        }
+        if (Touch.sConfig.isDelay()) {
+            mConsolePrint.printMultipleMessage(printMessageList);
+        }
+        if (Touch.sConfig.isPrint2File()) {
+            mFilePrint.printMultipleMessage(printMessageList);
+        }
         messagesList.clear();
     }
 

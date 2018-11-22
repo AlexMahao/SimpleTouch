@@ -2,9 +2,11 @@ package com.spearbothy.touch.core.print;
 
 import android.util.Log;
 
+import com.spearbothy.touch.core.Constants;
 import com.spearbothy.touch.core.Message;
 import com.spearbothy.touch.core.Touch;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,13 +17,17 @@ public class ConsolePrint implements Print {
 
     @Override
     public void printMessage(Message message) {
-        if (Touch.sSimple) {
-            Log.i(Touch.LOG_TAG, message.getSimplePrintMessage());
+        if (Touch.sConfig.isSimple()) {
+            Log.i(Constants.LOG_TAG, message.getSimplePrintMessage());
         } else {
-            Log.i(Touch.LOG_TAG, message.getPrintMessage());
+            Log.i(Constants.LOG_TAG, message.getPrintMessage());
         }
     }
 
     @Override
-    public void printMultipleMessage(List<Message> messages) {}
+    public void printMultipleMessage(List<Message> messages) {
+        for (Message message : messages) {
+            printMessage(message);
+        }
+    }
 }
