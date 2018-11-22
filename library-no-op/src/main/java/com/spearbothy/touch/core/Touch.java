@@ -5,16 +5,16 @@ import android.content.Context;
 /**
  * 空实现
  *
- * @author mahao 2018/11/13 下午2:24
+ * @author mahao
  */
 
 public class Touch {
 
     public static void init(Context context) {
-        init(context, true);
+        init(context, null);
     }
 
-    public static void init(Context context, boolean simple) {}
+    public static void init(Context context, Config config) {}
 
     public static void inject(Context context) {}
 }
