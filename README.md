@@ -119,6 +119,12 @@ public class Config {
 
 在这个流程图中，`calls`是一个数组，代表方法的调用，包含当前类的方法以及对应子`View`的方法。
 
+### 引用或借鉴的三方库
+
+- `com.android.support:appcompat-v7`
+- `com.google.dexmaker:dexmaker`
+- `com.alibaba:fastjson`
+- `com.noober.background:core`
 
 ### 关于
 
