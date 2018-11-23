@@ -88,7 +88,7 @@ public class ViewFactory implements LayoutInflater.Factory {
                 return createView(context, name, null);
             }
         } catch (Exception e) {
-            Log.w("BackgroundLibrary", "cannot create 【" + name + "】 : ");
+            Log.w(Constants.LOG_TAG, "cannot create 【" + name + "】 : ");
             return null;
         } finally {
             mConstructorArgs[0] = null;
@@ -109,7 +109,7 @@ public class ViewFactory implements LayoutInflater.Factory {
             constructor.setAccessible(true);
             return constructor.newInstance(mConstructorArgs);
         } catch (Exception e) {
-            Log.w("BackgroundLibrary", "cannot create 【" + name + "】 : ");
+            Log.w(Constants.LOG_TAG, "cannot create 【" + name + "】 : ");
             return null;
         }
     }

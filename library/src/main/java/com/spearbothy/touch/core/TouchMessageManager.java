@@ -21,7 +21,7 @@ class TouchMessageManager {
 
     private static final String ACTION_DOWN = "ACTION_DOWN";
     private static final String ACTION_UP = "ACTION_UP";
-    private static final long CLEAR_DELAY = 1000L;
+    private static final long CLEAR_DELAY = 500L;
 
     private List<Message> messagesList = new ArrayList<>();
 
