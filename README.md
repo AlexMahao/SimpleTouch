@@ -1,5 +1,7 @@
 
-<center> ![](img/simple_touch_log.png) </center>
+![](img/simple_touch_log.png)
+
+<br/>
 
 > 一个用于监听android事件分发流程的库，两行代码即可在运行时期监听事件的分发流程。
 
@@ -44,7 +46,7 @@ releaseApi 'com.spearbothy:simple-touch-no-op:1.0.3'
 
 #### 初始化
 
-在项目的`Application`的`onCreate()`中调用初始化方法
+在项目的`Application`的`onCreate()`中调用初始化方法`Touch.inject(this);`
 
 ```java
 Touch.init(this, new Config().setSimple(false));
@@ -89,7 +91,7 @@ public class Config {
 #### 备注
 
 - 提供了`no-op`版本，该版本中包含有初始化和注入方法的空实现，以达到`debug`和`release`使用不同的版本，使`release`不包含任何注入和初始化逻辑。
-
+- 在注入的时候有点耗时，如果页面过于复杂，会有种页面卡顿的感觉.
 
 ### 功能列表
 
@@ -117,6 +119,12 @@ public class Config {
 
 在这个流程图中，`calls`是一个数组，代表方法的调用，包含当前类的方法以及对应子`View`的方法。
 
+### 引用或借鉴的三方库
+
+- `com.android.support:appcompat-v7`
+- `com.google.dexmaker:dexmaker`
+- `com.alibaba:fastjson`
+- `com.noober.background:core`
 
 ### 关于
 
