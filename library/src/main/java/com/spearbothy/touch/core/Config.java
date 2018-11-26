@@ -14,6 +14,8 @@ public class Config {
     private boolean isRepeat = false;
     // 是否写入到文件
     private boolean isPrint2File = true;
+    // 是否处理，不处理则不会监听任何方法，任何功能都无法生效
+    private boolean isProcess = true;
 
     public boolean isSimple() {
         return isSimple;
@@ -49,5 +51,13 @@ public class Config {
     public Config setPrint2File(boolean print2File) {
         isPrint2File = print2File;
         return this;
+    }
+
+    public boolean isProcess() {
+        return isProcess;
+    }
+
+    public void setProcess(boolean process) {
+        isProcess = process;
     }
 }

@@ -27,6 +27,9 @@ public class Touch {
     }
 
     public static void init(Context context, Config config) {
+        if (!config.isProcess()) {
+            return;
+        }
         File dir = context.getDir(Constants.DEX_CACHE_DIR, Context.MODE_PRIVATE);
         dir.delete();
 
@@ -35,6 +38,9 @@ public class Touch {
     }
 
     public static void inject(Context context) {
+        if (sConfig == null || !sConfig.isProcess()) {
+            return;
+        }
         LayoutInflater inflater;
         if (context instanceof Activity) {
             inflater = ((Activity) context).getLayoutInflater();
