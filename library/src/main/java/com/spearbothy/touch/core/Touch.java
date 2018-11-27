@@ -50,13 +50,18 @@ public class Touch {
         ViewFactory factory = new ViewFactory();
         if (context instanceof AppCompatActivity) {
             final AppCompatDelegate delegate = ((AppCompatActivity) context).getDelegate();
-            factory.setInterceptFactory(new LayoutInflater.Factory() {
+            factory.setInterceptFactory(new LayoutInflater.Factory2() {
                 @Override
                 public View onCreateView(String name, Context context, AttributeSet attrs) {
                     return delegate.createView(null, name, context, attrs);
                 }
+
+                @Override
+                public View onCreateView(View parent, String name, Context context, AttributeSet attrs) {
+                    return delegate.createView(parent, name, context, attrs);
+                }
             });
         }
-        inflater.setFactory(factory);
+        inflater.setFactory2(factory);
     }
 }
