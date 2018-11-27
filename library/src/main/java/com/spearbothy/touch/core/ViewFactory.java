@@ -18,21 +18,21 @@ import java.util.Map;
  * @author mahao 2018/11/9 上午10:35
  */
 
-public class ViewFactory implements LayoutInflater.Factory {
+public class ViewFactory implements LayoutInflater.Factory2 {
 
     private static final String TAG = ViewFactory.class.getSimpleName();
 
-    private LayoutInflater.Factory mViewCreateFactory;
+    private LayoutInflater.Factory2 mViewCreateFactory;
 
     private static final Class<?>[] sConstructorSignature = new Class[]{Context.class, AttributeSet.class};
     private final Object[] mConstructorArgs = new Object[2];
     private static final Map<String, Constructor<? extends View>> sConstructorMap = new HashMap<>();
 
     @Override
-    public View onCreateView(String name, Context context, AttributeSet attrs) {
+    public View onCreateView(View parent, String name, Context context, AttributeSet attrs) {
         View view = null;
         if (mViewCreateFactory != null) {
-            view = mViewCreateFactory.onCreateView(name, context, attrs);
+            view = mViewCreateFactory.onCreateView(parent, name, context, attrs);
         }
         if (view == null) {
             view = createViewFromTag(context, name, attrs);
@@ -44,6 +44,11 @@ public class ViewFactory implements LayoutInflater.Factory {
             return view;
         }
         return proxy(view, attrs);
+    }
+
+    @Override
+    public View onCreateView(String name, Context context, AttributeSet attrs) {
+        return onCreateView(null, name, context, attrs);
     }
 
     private static View proxy(final View view, AttributeSet attrs) {
@@ -60,7 +65,7 @@ public class ViewFactory implements LayoutInflater.Factory {
         }
     }
 
-    public void setInterceptFactory(LayoutInflater.Factory factory) {
+    public void setInterceptFactory(LayoutInflater.Factory2 factory) {
         mViewCreateFactory = factory;
     }
 
