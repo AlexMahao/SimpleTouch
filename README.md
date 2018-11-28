@@ -1,4 +1,4 @@
-## SimpleTouch 分析
+## SimpleTouch
 
 ![](img/simple_touch_log.png)
 
