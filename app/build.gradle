@@ -20,8 +20,8 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     api 'com.android.support:appcompat-v7:26.1.0'
-    debugApi 'com.spearbothy:simple-touch:1.0.3'
-    releaseApi 'com.spearbothy:simple-touch-no-op:1.0.3'
+    debugApi 'com.spearbothy:simple-touch:1.0.4'
+    releaseApi 'com.spearbothy:simple-touch-no-op:1.0.4'
 //
 //    debugApi project(":library")
 //    releaseApi project(":library-no-op")
