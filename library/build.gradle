@@ -6,8 +6,8 @@ android {
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 26
-        versionCode 4
-        versionName "1.0.3"
+        versionCode 5
+        versionName "1.0.4"
     }
 
     buildTypes {
@@ -40,7 +40,7 @@ properties.load(project.rootProject.file('local.properties').newDataInputStream(
 publish {
     artifactId = 'simple-touch'
     uploadName = 'SimpleTouch'
-    publishVersion = '1.0.3'
+    publishVersion = '1.0.4'
 
     userOrg = rootProject.ext.userOrg
     repoName = rootProject.ext.repoName
