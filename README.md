@@ -37,7 +37,7 @@
 ![](img/simple_touch_console.png)
 
 
-同时提供以`json`的格式写入到磁盘，偏于细致分析。 (由于暂时没找到合适的流程图软件，暂时以json代替)
+同时提供以`json`的格式写入到磁盘，便于细致分析。 (由于暂时没找到合适的流程图软件，暂时以json代替)
 
 ![](img/simple_touch_file.png)
 
@@ -51,8 +51,8 @@
 在项目的`app`下的`build.gradle`中添加依赖
 
 ```
-debugApi 'com.spearbothy:simple-touch:1.0.3'
-releaseApi 'com.spearbothy:simple-touch-no-op:1.0.3'
+debugApi 'com.spearbothy:simple-touch:1.0.5'
+releaseApi 'com.spearbothy:simple-touch-no-op:1.0.5'
 ```
 
 **初始化**
