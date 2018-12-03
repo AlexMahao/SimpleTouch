@@ -2,6 +2,7 @@ package com.spearbothy.touch.core.print;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.annotation.JSONField;
+import com.spearbothy.touch.core.Constants;
 import com.spearbothy.touch.core.Message;
 
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public class JsonFactory {
             Message message = messagesList.get(i);
             if (message.getViewToken() == rootTouchView.getViewToken()
                     && message.isBefore()
-                    && "dispatchTouchEvent".equals(message.getMethodName())
+                    && Constants.DISPATCH_TOUCH_EVENT.equals(message.getMethodName())
                     ) {
                 data.add(rootTouchView);
                 rootTouchView = new JsonPrintEntity.TouchView();
