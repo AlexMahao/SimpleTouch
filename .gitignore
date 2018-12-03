@@ -12,7 +12,7 @@ bin
 build
 target
 dist
-/.idea
+.idea
 /out
 /*.ipr
 /*.iws
