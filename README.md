@@ -78,6 +78,8 @@ public class Config {
     private boolean isRepeat = false;
     // 是否写入到文件
     private boolean isPrint2File = true;
+    // 是否处理，不处理则不会监听任何方法，任何功能都无法生效
+    private boolean isProcess = true;
 }
 
 ```
