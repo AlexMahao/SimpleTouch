@@ -1,13 +1,13 @@
 package com.spearbothy.touch.core;
 
-import com.google.dexmaker.Code;
-import com.google.dexmaker.Comparison;
-import com.google.dexmaker.DexMaker;
-import com.google.dexmaker.FieldId;
-import com.google.dexmaker.Label;
-import com.google.dexmaker.Local;
-import com.google.dexmaker.MethodId;
-import com.google.dexmaker.TypeId;
+import com.android.dx.Code;
+import com.android.dx.Comparison;
+import com.android.dx.DexMaker;
+import com.android.dx.FieldId;
+import com.android.dx.Label;
+import com.android.dx.Local;
+import com.android.dx.MethodId;
+import com.android.dx.TypeId;
 
 import java.io.File;
 import java.io.IOException;
