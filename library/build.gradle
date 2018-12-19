@@ -30,6 +30,7 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.linkedin.dexmaker:dexmaker:2.2.0'
     implementation 'com.alibaba:fastjson:1.1.67.android'
+    implementation 'com.android.support:recyclerview-v7:26.1.0'
 }
 
 apply plugin: 'com.novoda.bintray-release'

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="simple_touch_divider_special">#DEDEDE</color>
+    <color name="simple_touch_first_color">#333333</color>
+
+</resources>

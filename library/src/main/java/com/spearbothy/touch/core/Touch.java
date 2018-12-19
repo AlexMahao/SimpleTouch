@@ -8,6 +8,8 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import com.spearbothy.touch.core.parser.NotificationHelper;
+
 import java.io.File;
 
 /**
@@ -35,6 +37,9 @@ public class Touch {
 
         sHostPackage = context.getPackageName();
         sConfig = config;
+
+        NotificationHelper.init(context);
+        NotificationHelper.sendNotificationForParser(context);
     }
 
     public static void inject(Context context) {

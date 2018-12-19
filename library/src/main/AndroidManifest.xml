@@ -4,4 +4,9 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
+    <application>
+        <activity
+            android:name=".parser.FileListActivity"
+            android:exported="true" />
+    </application>
 </manifest>
