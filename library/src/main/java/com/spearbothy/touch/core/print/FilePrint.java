@@ -14,7 +14,9 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * @author mahao 2018/11/15 下午3:19
@@ -22,7 +24,8 @@ import java.util.List;
 
 public class FilePrint implements Print {
 
-    private static final String DIR = "SimpleTouch";
+    public static final String DIR = "SimpleTouch";
+    private static final String LOG_TOKEN_FORMART = "yyyy-MM-dd_HH:mm:ss";
 
     @Override
     public void printMessage(Message message) {}
@@ -48,8 +51,9 @@ public class FilePrint implements Print {
             }
 
             String absFileDir = Environment.getExternalStorageDirectory() + File.separator + DIR;
+            SimpleDateFormat sdf = new SimpleDateFormat(LOG_TOKEN_FORMART, Locale.getDefault());
 
-            String absFileName = absFileDir + File.separator + Touch.sHostPackage + "_" + System.currentTimeMillis() + "_log.txt";
+            String absFileName = absFileDir + File.separator + Touch.sHostPackage + "_" + sdf.format(System.currentTimeMillis()) + "_log.txt";
 
             File parentFile = new File(absFileDir);
 
