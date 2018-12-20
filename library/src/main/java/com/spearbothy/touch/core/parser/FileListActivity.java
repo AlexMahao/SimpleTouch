@@ -62,7 +62,7 @@ public class FileListActivity extends AppCompatActivity implements OnItemClickLi
 
     @Override
     public void onItemClick(View view, int position) {
-
+        startActivity(ChartActivity.getIntent(this, mFiles.get(position)));
     }
 
     private class RecyclerViewAdapter extends RecyclerView.Adapter<ViewHolder> {
