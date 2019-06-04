@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,13 +24,20 @@ import java.io.InputStreamReader;
  * @date 2018/12/20 上午11:03
  */
 
-public class ChartActivity extends AppCompatActivity {
+public class ChartActivity extends AppCompatActivity implements View.OnClickListener {
+
+    private static final String TAG = ChartActivity.class.getSimpleName();
 
     private static final String INTENT_PARAMS_FILE = "file";
 
-    private TextView mTextView;
-
     private String mFilePath;
+
+    private String mJsonData;
+
+    private boolean isJson = true;
+    private TextView mTypeView;
+    private JsonViewerFragment mJsonFragment;
+    private ChartFragment mChartFragment;
 
     public static Intent getIntent(Context context, String file) {
         Intent intent = new Intent(context, ChartActivity.class);
@@ -46,8 +54,8 @@ public class ChartActivity extends AppCompatActivity {
             mFilePath = getIntent().getStringExtra(INTENT_PARAMS_FILE);
         }
         setContentView(R.layout.simple_touch_activity_chart);
-        mTextView = (TextView) findViewById(R.id.text);
-
+        mTypeView = (TextView) findViewById(R.id.type);
+        mTypeView.setOnClickListener(this);
         readFile();
     }
 
@@ -61,14 +69,60 @@ public class ChartActivity extends AppCompatActivity {
         new ReadFileTask().execute(mFilePath);
     }
 
-    private void refreshChart(String json) {
-        mTextView.setText(json);
+    private void refreshView(String json) {
+        if (TextUtils.isEmpty(json)) {
+            Toast.makeText(this, "读取文件错误" + mFilePath, Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
+
+        // json
+        mJsonData = json;
+
+        mJsonFragment = JsonViewerFragment.newInstance(mJsonData);
+        mChartFragment = ChartFragment.newInstance(mJsonData);
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(R.id.fragment, mJsonFragment, "json")
+                .add(R.id.fragment, mChartFragment, "chart")
+                .commit();
+
+        switchFragment();
+    }
+
+    private void switchFragment() {
+        if (TextUtils.isEmpty(mJsonData)) {
+            Toast.makeText(this, "数据为空，无法进行展示" + mFilePath, Toast.LENGTH_SHORT).show();
+            return;
+        }
+        isJson = !isJson;
+        if (isJson) {
+            mTypeView.setText("JSON视图");
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .hide(mChartFragment)
+                    .show(mJsonFragment)
+                    .commit();
+        } else {
+            mTypeView.setText("View视图");
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .hide(mJsonFragment)
+                    .show(mChartFragment)
+                    .commit();
+        }
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString(INTENT_PARAMS_FILE, mFilePath);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switchFragment();
     }
 
     private class ReadFileTask extends AsyncTask<String, Void, String> {
@@ -113,7 +167,7 @@ public class ChartActivity extends AppCompatActivity {
             if (dialog != null && dialog.isShowing()) {
                 dialog.dismiss();
             }
-            refreshChart(result);
+            refreshView(result);
         }
     }
 }

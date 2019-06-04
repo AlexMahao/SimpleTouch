@@ -14,6 +14,9 @@ import java.util.List;
 
 public class JsonFactory {
 
+    public static final String ENTER = ">>";
+    public static final String EXIT = "<<";
+
     public static String toJson(List<Message> messagesList) {
         JsonPrintEntity data = new JsonPrintEntity();
         JsonPrintEntity.TouchView rootTouchView = new JsonPrintEntity.TouchView();
@@ -48,7 +51,7 @@ public class JsonFactory {
 
             // 添加方法
             JsonPrintEntity.TouchMethod touchMethod = new JsonPrintEntity.TouchMethod();
-            touchMethod.setDirection(message.isBefore() ? ">>" : "<<");
+            touchMethod.setDirection(message.isBefore() ? ENTER : EXIT);
             touchMethod.setEvent(message.getEvent());
             touchMethod.setMethodName(message.getMethodName());
             touchMethod.setResult(message.getResult());
@@ -59,6 +62,10 @@ public class JsonFactory {
         }
 
         return JSON.toJSONString(data, true);
+    }
+
+    public static JsonPrintEntity toEntity(String json) {
+        return JSON.parseObject(json, JsonPrintEntity.class);
     }
 
     public static JsonPrintEntity.TouchView findTouchView(JsonPrintEntity.TouchView root, int viewToken) {
@@ -75,7 +82,7 @@ public class JsonFactory {
         return root;
     }
 
-    private static class JsonPrintEntity extends ArrayList<JsonPrintEntity.TouchView> {
+    public static class JsonPrintEntity extends ArrayList<JsonPrintEntity.TouchView> {
 
         public static class TouchView {
 
@@ -85,7 +92,7 @@ public class JsonFactory {
             private String absClassName;
             @JSONField(ordinal = 10)
             private String id;
-            @JSONField(ordinal = 20, serialize = false)
+            @JSONField(ordinal = 20)
             private int viewToken;
             @JSONField(ordinal = 30)
             private List<Object> calls = new ArrayList<>(); // 包含 TouchView 和 TouchMethod

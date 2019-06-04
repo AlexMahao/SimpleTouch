@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">library</string>
+
+    <string name="jsonViewer_icon_plus">expand</string>
+    <string name="jsonViewer_icon_minus">collapse</string>
 </resources>

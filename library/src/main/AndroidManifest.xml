@@ -7,9 +7,11 @@
     <application>
         <activity
             android:name=".parser.FileListActivity"
+            android:theme="@style/TouchTheme"
             android:exported="true" />
         <activity
             android:name=".parser.ChartActivity"
+            android:theme="@style/TouchTheme"
             android:exported="true" />
     </application>
 </manifest>

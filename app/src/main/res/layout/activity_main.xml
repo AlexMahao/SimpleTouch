@@ -18,12 +18,16 @@
         android:clickable="true"
         android:text="Custom View"
         android:textColor="@android:color/white" />
-    <Button
-        android:id="@+id/button"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="20dp"
-        android:background="@color/colorPrimary"
-        android:text="button"
-        android:textColor="@android:color/white" />
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/button"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/colorPrimary"
+            android:text="button"
+            android:textColor="@android:color/white" />
+    </RelativeLayout>
 </LinearLayout>
