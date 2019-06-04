@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.spearbothy.touch.core.R;
+import com.spearbothy.touch.core.Touch;
 import com.spearbothy.touch.core.print.FilePrint;
 
 import java.io.File;
@@ -46,7 +47,7 @@ public class FileListActivity extends AppCompatActivity implements OnItemClickLi
     }
 
     private void makeData() {
-        String absFileDir = Environment.getExternalStorageDirectory() + File.separator + FilePrint.DIR;
+        String absFileDir = Environment.getExternalStorageDirectory() + File.separator + FilePrint.DIR + File.separator + Touch.sHostPackage;
         File file = new File(absFileDir);
         if (!file.exists()) {
             Toast.makeText(this, "请查看" + absFileDir + "是否有文件", Toast.LENGTH_SHORT).show();

@@ -50,10 +50,10 @@ public class FilePrint implements Print {
                 return "请先调用Touch.init(context)完成初始化";
             }
 
-            String absFileDir = Environment.getExternalStorageDirectory() + File.separator + DIR;
+            String absFileDir = Environment.getExternalStorageDirectory() + File.separator + DIR + File.separator + Touch.sHostPackage + File.separator;
             SimpleDateFormat sdf = new SimpleDateFormat(LOG_TOKEN_FORMART, Locale.getDefault());
 
-            String absFileName = absFileDir + File.separator + Touch.sHostPackage + "_" + sdf.format(System.currentTimeMillis()) + "_log.txt";
+            String absFileName = absFileDir + sdf.format(System.currentTimeMillis()) + "_log.txt";
 
             File parentFile = new File(absFileDir);
 

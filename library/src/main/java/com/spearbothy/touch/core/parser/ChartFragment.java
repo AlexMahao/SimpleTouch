@@ -67,16 +67,15 @@ public class ChartFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-        LinearLayout view = (LinearLayout) inflater.inflate(R.layout.simple_touch_fragment_chart, container, false);
-
+        View view = inflater.inflate(R.layout.simple_touch_fragment_chart, container, false);
+        LinearLayout containerLayout = view.findViewById(R.id.container);
         for (JsonFactory.JsonPrintEntity.TouchView touchView : mEntityList) {
             List<ChartGroup> groups = new ArrayList<>();
             position = 0;
             addChartGroup(groups, touchView);
             ChartView chartView = new ChartView(getContext());
             chartView.setData(groups);
-            view.addView(chartView);
+            containerLayout.addView(chartView);
         }
         return view;
     }
