@@ -14,16 +14,17 @@
 
 **图表形式查看**
 
-![](img/simple_touch_chart.png)
+
+<img src="img/simple_touch_chart.png" alt="Sample"  width="50%" height="50%">
 
 **JSON格式查看**
 
-![](img/simple_touch_json.png)
+<img src="img/simple_touch_json.png" alt="Sample"  width="50%" height="50%">
 
 
 ### 简介
 
-`SimpleTouch`为了解决如上问题而诞生，该库可以在运行时期打印完整的事件分发流程。
+`SimpleTouch`为了解决事件分发问题而诞生，该库可以在运行时期打印完整的事件分发流程。
 
 - 监听`View`的`dispatchTouchEvent`，`onTouchEvent`，`onInterceptTouchEvent`。
 - 运行时期动态打印事件分发流程。
@@ -31,17 +32,6 @@
 - 去重功能，对相同的`move`事件会自动过滤。
 - 提供`no-op`版本，使用时可区分`debug`和`release`。
 - 提供不同模式显示
-
-对于一次完整的手指点击，控制台打印日志如下：
-
-![](img/simple_touch_console.png)
-
-
-同时提供以`json`的格式写入到磁盘，便于细致分析。 (由于暂时没找到合适的流程图软件，暂时以json代替)
-
-![](img/simple_touch_file.png)
-
-该展示效果来源于`bejson`的视图展示功能。
 
 
 ### 使用
@@ -101,6 +91,14 @@ public class Config {
 **使用**
 
 编译完成之后，打开app，开始触摸吧！！！ 每一次手指离开到触摸请间隔大于1s，目的是对于每次触摸加以区分，暂时没想到合适的判断条件。
+
+**流程图查看**
+
+下拉通知中可以看到SimpleTouch的入口
+
+<img src="img/simple_touch_notification.png"  width="50%" height="50%">
+
+
 
 **备注**
 
