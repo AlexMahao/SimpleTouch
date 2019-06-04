@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 /**
  * @author mahao
- * @date 2018/12/20 上午11:43
  */
 
 public class ChartGroup {

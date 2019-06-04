@@ -13,7 +13,6 @@ import com.spearbothy.touch.core.recycler.JsonRecyclerView;
 
 /**
  * @author mahao
- * @date 2019-06-04 11:23
  */
 public class JsonViewerFragment extends Fragment {
 

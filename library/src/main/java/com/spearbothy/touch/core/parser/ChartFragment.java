@@ -25,7 +25,6 @@ import java.util.List;
 
 /**
  * @author mahao
- * @date 2019-06-04 11:22
  */
 public class ChartFragment extends Fragment {
 

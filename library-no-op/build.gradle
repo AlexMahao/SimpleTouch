@@ -30,7 +30,7 @@ properties.load(project.rootProject.file('local.properties').newDataInputStream(
 publish {
     artifactId = 'simple-touch-no-op'
     uploadName = 'SimpleTouch-NO-OP'
-    publishVersion = '1.0.5'
+    publishVersion = '1.0.6'
 
     userOrg = rootProject.ext.userOrg
     repoName = rootProject.ext.repoName

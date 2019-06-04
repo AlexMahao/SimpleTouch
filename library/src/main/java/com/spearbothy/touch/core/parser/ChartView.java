@@ -21,7 +21,6 @@ import java.util.List;
 
 /**
  * @author mahao
- * @date 2018/12/28 上午10:43
  */
 
 public class ChartView extends View {

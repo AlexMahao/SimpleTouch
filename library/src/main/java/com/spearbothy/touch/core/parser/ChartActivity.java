@@ -21,7 +21,6 @@ import java.io.InputStreamReader;
 
 /**
  * @author mahao
- * @date 2018/12/20 上午11:03
  */
 
 public class ChartActivity extends AppCompatActivity implements View.OnClickListener {
