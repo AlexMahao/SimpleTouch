@@ -42,26 +42,26 @@ void SetAllCapabilities(jvmtiEnv *jvmti) {
  */
 extern "C" JNIEXPORT jint JNICALL Agent_OnAttach(JavaVM *vm, char *options, void *reserved) {
     ALOGI("Agent_OnAttach options %s", options);
-
+    // 创建jvmti指针
     localJvmtiEnv = CreateJvmtiEnv(vm);
 
     if (localJvmtiEnv == nullptr) {
         ALOGI("Agent_OnAttach  jvmti_env err");
         return JNI_ERR;
     }
+    // 开启调试功能
     SetAllCapabilities(localJvmtiEnv);
 
+    // 设置方法进入&方法退出的回调方法，回调至JvmtiCallbacks
     jvmtiEventCallbacks callbacks;
-
     memset(&callbacks, 0, sizeof(callbacks));
-
     callbacks.MethodEntry = &JvmtiCallbacks::methodEntry;
     callbacks.MethodExit = &JvmtiCallbacks::methodExit;
-
     int error = localJvmtiEnv->SetEventCallbacks(&callbacks, sizeof(callbacks));
 
     ALOGI("Agent_OnAttach_callbacks  SetEventCallbacks result = %d", error);
 
+    // 设置监听的事件：方法进入&方法退出
     SetEventNotification(localJvmtiEnv, JVMTI_ENABLE, JVMTI_EVENT_METHOD_ENTRY);
     SetEventNotification(localJvmtiEnv, JVMTI_ENABLE, JVMTI_EVENT_METHOD_EXIT);
 

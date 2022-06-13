@@ -23,10 +23,11 @@ JvmtiCallbacks::methodExit(jvmtiEnv *jvmti_env, JNIEnv *jni_env, jthread thread,
 void JvmtiCallbacks::log(jvmtiEnv *jvmti_env, JNIEnv *jni_env, jthread thread, jmethodID method,
                          jboolean is_entry, jboolean return_value) {
 
+    // 获取方法签名
     char *methodName;
     char *methodSignature;
     jvmti_env->GetMethodName(method, &methodName, &methodSignature, NULL);
-
+    // 根据方法签名判断是否是 onTouchEvent等
     if (!Utils::getInstance()->isTargetMethod(methodName)) {
         return;
     }
@@ -34,10 +35,11 @@ void JvmtiCallbacks::log(jvmtiEnv *jvmti_env, JNIEnv *jni_env, jthread thread, j
 //    if (!Utils::getInstance()->isTargetApp(className)) {
 //        return;
 //    }
-
+    // 获取线程信息
     char *threadName;
     Utils::getInstance()->getThreadName(jvmti_env, thread, &threadName);
 
+    // 获取本地变量表，用于获取方法入参
     jint entry_count = 0;
     jvmtiLocalVariableEntry *table_ptr = NULL;
     jvmti_env->GetLocalVariableTable(method, &entry_count, &table_ptr);
@@ -57,8 +59,9 @@ void JvmtiCallbacks::log(jvmtiEnv *jvmti_env, JNIEnv *jni_env, jthread thread, j
             //
 //            ALOGI("mahao %d %s %s %d>>", param_size, table_ptr[j].name, table_ptr[j].signature,
 //                  table_ptr[j].slot);
+            // 根据本地变量表获取到的索引获取入参对象，即MotionEvent对象
             jvmti_env->GetLocalObject(thread, 0, table_ptr[j].slot, &param_obj);
-
+            // 调用MotionEvent对象的actionToString方法，获取ACTION_DOWN等事件类型。
             motionEvent = jni_env->GetStringUTFChars(
                     Utils::getInstance()->motionEvent_actionToString(jni_env, param_obj), 0);
 
@@ -70,17 +73,18 @@ void JvmtiCallbacks::log(jvmtiEnv *jvmti_env, JNIEnv *jni_env, jthread thread, j
         }
     }
 
-
+    // 获取调用当前方法的对象
     jobject instance;
     jvmti_env->GetLocalInstance(thread, 0, &instance);
-
+    // 获取当前对象的全路径类名
     jclass klass = jni_env->GetObjectClass(instance);
+    char *className;
+    jvmti_env->GetClassSignature(klass, &className, NULL);
+    // 获取对象的hashCode
     jint hashCode;
     jvmti_env->GetObjectHashCode(instance, &hashCode);
 
-    char *className;
-    jvmti_env->GetClassSignature(klass, &className, NULL);
-
+    // 根据信息组装，输出日志
     if (is_entry) {
         // 如果当前进入对象和方法和前一个相同，则只输出第一个
         string lastMethod = string(className) + to_string(hashCode) + string(methodName);
