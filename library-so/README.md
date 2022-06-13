@@ -3,6 +3,7 @@
 #### 1、将so文件放入待测试应用的私有目录
 
 1）选择当前应用对应arm版本的 `SO`文件位置：[SO文件地址](./so)
+
 2）通过AS左侧的Device File Explorer工具，将`SO`文件放入到当前待测试应用的私有目录。
 
 以当前demo工程举例，放入文件位置为：
@@ -62,9 +63,9 @@ I/Simple_Touch: main#Lcom/android/internal/policy/DecorView;185412568#dispatchTo
 ### 原理介绍
 
 > 核心原理及文档
-- [JVMTI接口文档](https://docs.oracle.com/javase/8/docs/platform/jvmti/jvmti.html)
-- [Android JVMTI 支持](https://source.android.google.cn/devices/tech/dalvik/art-ti?hl=zh-cn)
-其余相关文档可搜索JVMTI等查询。
+> - [JVMTI接口文档](https://docs.oracle.com/javase/8/docs/platform/jvmti/jvmti.html)
+> - [Android JVMTI 支持](https://source.android.google.cn/devices/tech/dalvik/art-ti?hl=zh-cn)
+> 其余相关文档可搜索JVMTI等查询。
 
 #### 1、编写JVMTI `Agent_OnAttach`回调实现
 
