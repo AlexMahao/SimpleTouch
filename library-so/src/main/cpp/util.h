@@ -35,6 +35,10 @@ public :
     jint motionEvent_action(JNIEnv *env, jobject object);
 
     jstring motionEvent_actionToString(JNIEnv *env, jobject object);
+
+    void initJavaCallback(JNIEnv *env);
+
+    void exceptionCallback(jobject exception);
 };
 
 #endif //JVMTIDEMO_UTIL_H

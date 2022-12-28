@@ -25,12 +25,14 @@ public class JVMTIHelper {
                 ClassLoader classLoader = context.getClassLoader();
                 Method findLibrary = ClassLoader.class.getDeclaredMethod("findLibrary", String.class);
                 String hotfixSo = (String) findLibrary.invoke(classLoader, "simple_touch");
-
                 String agentSoPath = copy(context, hotfixSo, "jvmti", "simple_touch.so");
+
+                // 初始化relase模式
+                NativeLib.initInReleaseMode();
                 // 添加agent代理
                 Debug.attachJvmtiAgent(agentSoPath, null, classLoader);
 
-
+                NativeLib.initJvmti();
             }
         } catch (Exception ex) {
             ex.printStackTrace();

@@ -59,7 +59,7 @@ bool Utils::isTargetMethod(const char *name) {
 jstring Utils::motionEvent_actionToString(JNIEnv *env, jobject object) {
     jclass klass = env->GetObjectClass(object);
     jmethodID actionToStringMethodID = env->GetStaticMethodID(klass, "actionToString",
-                                                        "(I)Ljava/lang/String;");
+                                                              "(I)Ljava/lang/String;");
     return static_cast<jstring>(env->CallStaticObjectMethod(klass,
                                                             actionToStringMethodID,
                                                             motionEvent_action(env, object)));
@@ -70,3 +70,21 @@ jint Utils::motionEvent_action(JNIEnv *env, jobject object) {
     jmethodID getActionMethod = env->GetMethodID(klass, "getAction", "()I");
     return env->CallIntMethod(object, getActionMethod);;
 }
+
+// 回调java方法通知异常发生
+static JNIEnv *jni_env = nullptr;
+static jclass helperClass;
+
+void Utils::initJavaCallback(JNIEnv *env) {
+    jni_env = env;
+    jclass tempHelperClass = jni_env->FindClass("com/sparbothy/library_so/NativeCallbackHelper");
+    helperClass = static_cast<jclass>(env->NewGlobalRef(tempHelperClass));
+}
+
+void Utils::exceptionCallback(jobject exception) {
+    jmethodID exceptionMethod = jni_env->GetStaticMethodID(helperClass, "exception", "(Ljava/lang/Object;)V");
+    jni_env->CallStaticVoidMethod(helperClass, exceptionMethod, exception);
+}
+
+
+

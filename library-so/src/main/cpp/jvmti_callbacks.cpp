@@ -62,10 +62,14 @@ void JvmtiCallbacks::log(jvmtiEnv *jvmti_env, JNIEnv *jni_env, jthread thread, j
             // 根据本地变量表获取到的索引获取入参对象，即MotionEvent对象
             jvmti_env->GetLocalObject(thread, 0, table_ptr[j].slot, &param_obj);
             // 调用MotionEvent对象的actionToString方法，获取ACTION_DOWN等事件类型。
-            motionEvent = jni_env->GetStringUTFChars(
-                    Utils::getInstance()->motionEvent_actionToString(jni_env, param_obj), 0);
+            if (param_obj != NULL) {
+                motionEvent = jni_env->GetStringUTFChars(
+                        Utils::getInstance()->motionEvent_actionToString(jni_env, param_obj), 0);
+                jni_env->DeleteLocalRef(param_obj);
+            } else {
+                motionEvent = "unknown";
+            }
 
-            jni_env->DeleteLocalRef(param_obj);
             jvmti_env->Deallocate(reinterpret_cast<unsigned char *>(table_ptr[j].signature));
             jvmti_env->Deallocate(reinterpret_cast<unsigned char *>(table_ptr[j].name));
             jvmti_env->Deallocate(
@@ -110,6 +114,13 @@ void JvmtiCallbacks::log(jvmtiEnv *jvmti_env, JNIEnv *jni_env, jthread thread, j
                   return_value ? "true" : "false");
         }
     }
+}
+
+
+void JvmtiCallbacks::exception(jvmtiEnv *jvmti_env, JNIEnv *jni_env, jthread thread, jmethodID method,
+                               jlocation location, jobject exception, jmethodID catch_method,
+                               jlocation catch_location) {
+    Utils::getInstance()->exceptionCallback(exception);
 }
 
 

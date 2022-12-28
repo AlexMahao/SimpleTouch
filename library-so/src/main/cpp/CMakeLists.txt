@@ -25,6 +25,16 @@ add_library( # Sets the name of the library.
 
         jvmti_callbacks.cpp
 
+        release/xdl/xdl.c
+
+        release/xdl/xdl_iterate.c
+
+        release/xdl/xdl_linker.c
+
+        release/xdl/xdl_lzma.c
+
+        release/xdl/xdl_util.c
+
         simple_touch.cpp)
 
 # Searches for a specified prebuilt library and stores the path as a

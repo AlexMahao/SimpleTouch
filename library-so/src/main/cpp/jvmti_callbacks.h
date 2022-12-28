@@ -24,6 +24,10 @@ public:
                                    jvalue return_value);
 
 
+    static void exception(jvmtiEnv *jvmti_env, JNIEnv *jni_env, jthread thread, jmethodID method,
+                          jlocation location, jobject exception, jmethodID catch_method,
+                          jlocation catch_location);
+
 private:
     static void log(jvmtiEnv *jvmti_env,
                     JNIEnv *jni_env,
@@ -31,7 +35,6 @@ private:
                     jmethodID method, // 方法标识
                     jboolean is_entry, // 是否是因为异常退出
                     jboolean return_value);
-
 
 
 };
